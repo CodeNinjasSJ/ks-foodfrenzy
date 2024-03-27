@@ -34,7 +34,7 @@ public class LevelMoves : Level
         base.OnMove();
 
         movesUsed++;
-
+        hud.SetRemaining(numMoves - movesUsed);
         if(numMoves - movesUsed == 0)
         {
             if(currentScore >= targetScore)
@@ -47,7 +47,7 @@ public class LevelMoves : Level
             }
         }
     }
-    protected virtual IEnumerator WaitForGridFill()
+    protected override IEnumerator WaitForGridFill()
     {
         while (grid.IsFilling)
         {
@@ -55,14 +55,14 @@ public class LevelMoves : Level
         }
         if (didWin && !grid.IsFilling)
         {
-            hud.OnGameWIn(currentScore);
+            hud.OnGameWin(currentScore);
         }
         else
         {
             hud.OnGameLose();
         }
     }
-    public virtual void OnPieceCleared(GamePiece piece)
+    public override void OnPieceCleared(GamePiece piece)
     {
         currentScore += piece.score;
         hud.SetScore(currentScore);

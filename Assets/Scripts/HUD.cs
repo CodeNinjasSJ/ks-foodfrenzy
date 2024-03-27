@@ -10,6 +10,7 @@ public class HUD : MonoBehaviour
         MOVES,
     };
     public Level level;
+    public GameOver gameOver;
 
     public Text RemainingText;
     public Text RemainingSubtext;
@@ -93,13 +94,14 @@ public class HUD : MonoBehaviour
 
         }
     }
-    public void OnGameWIn(int score)
+    public void OnGameWin(int score)
     {
         isGameOver = true;
+        gameOver.ShowWin(score, starIndex);
     }
 
     public void OnGameLose()
     {
-        isGameOver = false;
+        gameOver.ShowLose();
     }
 }
